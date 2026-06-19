@@ -13,13 +13,74 @@ use App\Http\Middleware\LogAcessoMiddleware;
 |
 */
 
-Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
+
+Route::get('/', [App\Http\Controllers\PrincipalController::class, 'principal']);
 
 
-Route::prefix('/aluno')->group(function(){
-    Route::get('/index', [App\Http\Controllers\AlunoController::class, 'index'])->name('aluno.index');
-    Route::post('/add', [App\Http\Controllers\AlunoController::class, 'add'])->name('aluno.add');
-    Route::post('/remove', [App\Http\Controllers\AlunoController::class, 'remove'])->name('aluno.remove');
-    Route::post('/edit', [App\Http\Controllers\AlunoController::class, 'edit'])->name('aluno.edit');
-    Route::get('/list', [App\Http\Controllers\AlunoController::class, 'list'])->name('aluno.list');
-}); 
+Route::prefix('/dashboard')->group(function(){
+
+    Route::get('/index', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
+
+});
+
+
+Route::prefix('/tarefas')->group(function(){
+
+    Route::get('/index', [App\Http\Controllers\TarefaController::class, 'index'])->name('tarefas.index');
+
+    Route::post('/add', [App\Http\Controllers\TarefaController::class, 'add'])->name('tarefas.add');
+    Route::post('/concluir/{id}',[App\Http\Controllers\TarefaController::class,'concluir'])->name('tarefas.concluir');
+});
+
+
+Route::prefix('/estudos')->group(function(){
+
+    Route::get('/index', [App\Http\Controllers\EstudoController::class, 'index'])->name('estudos.index');
+
+});
+
+
+Route::prefix('/calendario')->group(function(){
+
+    Route::get('/index', [App\Http\Controllers\CalendarioController::class, 'index'])->name('calendario.index');
+
+});
+
+
+Route::prefix('/metas')->group(function(){
+
+    Route::get('/index', [App\Http\Controllers\MetaController::class, 'index'])->name('metas.index');
+
+});
+
+Route::prefix('/comunidade')->group(function(){
+
+    Route::get('/index',
+    
+    [App\Http\Controllers\ComunidadeController::class,
+    'index'])
+    
+    ->name('comunidade.index');
+    
+    
+    Route::post('/add',
+    
+    [App\Http\Controllers\ComunidadeController::class,
+    'add'])
+    
+    ->name('comunidade.add');
+    
+    
+    Route::post('/remove/{id}', [App\Http\Controllers\ComunidadeController::class,'remove'])->name('comunidade.remove');
+    
+    
+    Route::post('/edit/{id}',[App\Http\Controllers\ComunidadeController::class,'edit'])->name('comunidade.edit');
+    
+    });
+
+
+Route::prefix('/perfil')->group(function(){
+
+    Route::get('/index', [App\Http\Controllers\PerfilController::class, 'index'])->name('perfil.index');
+
+});
