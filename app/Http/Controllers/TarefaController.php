@@ -45,4 +45,15 @@ class TarefaController extends Controller
 
     }
 
+    public function remove($id)
+{
+
+$tarefa=Tarefa::find($id);
+
+$tarefa->delete();
+
+return back();
+
+}
+
 }

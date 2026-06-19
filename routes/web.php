@@ -30,6 +30,7 @@ Route::prefix('/tarefas')->group(function(){
 
     Route::post('/add', [App\Http\Controllers\TarefaController::class, 'add'])->name('tarefas.add');
     Route::post('/concluir/{id}',[App\Http\Controllers\TarefaController::class,'concluir'])->name('tarefas.concluir');
+    Route::post('/remove/{id}',[App\Http\Controllers\TarefaController::class,'remove'])->name('tarefas.remove');
 });
 
 
@@ -47,11 +48,17 @@ Route::prefix('/calendario')->group(function(){
 });
 
 
-Route::prefix('/metas')->group(function(){
 
-    Route::get('/index', [App\Http\Controllers\MetaController::class, 'index'])->name('metas.index');
+    Route::prefix('/metas')->group(function(){
 
-});
+        Route::get('/index',[App\Http\Controllers\MetaController::class,'index']) ->name('metas.index');
+        
+        Route::post('/add',[App\Http\Controllers\MetaController::class,'add'])->name('metas.add');
+        
+        Route::post('/edit/{id}',[App\Http\Controllers\MetaController::class,'edit']) ->name('metas.edit');
+     
+        Route::post('/remove/{id}',[App\Http\Controllers\MetaController::class,'remove'])->name('metas.remove'); });
+
 
 Route::prefix('/comunidade')->group(function(){
 
